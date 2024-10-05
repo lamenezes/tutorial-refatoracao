@@ -49,7 +49,6 @@ def renderiza_texto_plano(fatura, obras):
         return resultado
 
     for performance in fatura.performances:
-        # soma créditos por volume
         resultado += f"  {obra_da(performance)['nome']}: {brl(valor_da(performance)/ 100)} ({performance['espectadores']} lugares)\n"
 
     resultado += f"Valor a pagar é de {brl(valor_total(fatura) / 100)}\n"

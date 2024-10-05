@@ -13,7 +13,6 @@ def renderiza_texto_plano(fatura, obras):
     resultado = f"Recibo para {fatura.cliente}\n"
 
     for performance in fatura.performances:
-        # soma créditos por volume
         resultado += f"  {performance.obra['nome']}: {brl(performance.calcula_valor()/ 100)} ({performance.espectadores} lugares)\n"
 
     resultado += f"Valor a pagar é de {brl(fatura.calcula_valor_total() / 100)}\n"

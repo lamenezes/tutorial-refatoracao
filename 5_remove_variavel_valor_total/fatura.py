@@ -41,7 +41,6 @@ def fatura(dados_demonstrativo, obras):
         return resultado
 
     for performance in dados_demonstrativo["performances"]:
-        # soma créditos por volume
         resultado += f"  {obra_da(performance)['nome']}: {brl(valor_da(performance)/ 100)} ({performance['espectadores']} lugares)\n"
 
     valor_total = valor_total(dados_demonstrativo["performances"])
