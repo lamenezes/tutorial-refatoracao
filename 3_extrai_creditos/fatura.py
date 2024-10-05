@@ -32,9 +32,13 @@ def fatura(performance, obras):
     for performance in performance["performances"]:
         # soma créditos por volume
         créditos += creditos_da(performance)
-        resultado += f"  {obra_da(performance)['nome']}: R$ {valor_da(performance)/ 100:.2f} ({performance['espectadores']} lugares)\n"
+        resultado += f"  {obra_da(performance)['nome']}: {brl(valor_da(performance)/ 100)} ({performance['espectadores']} lugares)\n"
         valor_total += valor_da(performance)
 
-    resultado += f"Valor a pagar é de R$ {valor_total / 100:.2f}\n"
+    resultado += f"Valor a pagar é de {brl(valor_total / 100)}\n"
     resultado += f"Você ganhou {créditos} créditos\n"
     return resultado
+
+
+def brl(numero):
+    return f"R$ {numero:.2f}"
