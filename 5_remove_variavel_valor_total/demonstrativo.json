@@ -1,0 +1,19 @@
+[
+  {
+    "cliente": "Empresão",
+    "performances": [
+      {
+        "id_obra": "hamlet",
+        "espectadores": 55
+      },
+      {
+        "id_obra": "sonho-verão",
+        "espectadores": 35
+      },
+      {
+        "id_obra": "otelo",
+        "espectadores": 40
+      }
+    ]
+  }
+]
