@@ -1,12 +1,6 @@
 from dataclasses import dataclass
 
 
-@dataclass
-class Fatura:
-    cliente: str
-    performances: list[dict]
-
-
 def fatura(dados_demonstrativo, obras):
     fatura = Fatura(cliente=dados_demonstrativo["cliente"], performances=dados_demonstrativo["performances"])
     return renderiza_texto_plano(fatura, obras)
@@ -62,6 +56,12 @@ def renderiza_texto_plano(fatura, obras):
     resultado += f"Valor a pagar é de {brl(valor_total / 100)}\n"
     resultado += f"Você ganhou {créditos_totais(fatura.performances)} créditos\n"
     return resultado
+
+
+@dataclass
+class Fatura:
+    cliente: str
+    performances: list[dict]
 
 
 def brl(numero):
