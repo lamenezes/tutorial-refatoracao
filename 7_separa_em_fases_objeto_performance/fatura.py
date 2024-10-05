@@ -34,6 +34,13 @@ class Performance:
 
         return resultado
 
+    def calcula_créditos(self):
+        resultado = max(self.espectadores - 30, 0)
+        # soma um crédito extra para cada dez espectadores de comédia
+        if self.obra["tipo"] == "comédia":
+            resultado += self.espectadores // 5
+        return resultado
+
 
 @dataclass
 class Fatura:
@@ -52,18 +59,11 @@ def fatura(dados_demonstrativo, obras):
 def renderiza_texto_plano(fatura, obras):
     resultado = f"Recibo para {fatura.cliente}\n"
 
-    def creditos_da(performance):
-        resultado = max(performance.espectadores - 30, 0)
-        # soma um crédito extra para cada dez espectadores de comédia
-        if performance.obra["tipo"] == "comédia":
-            resultado += performance.espectadores // 5
-        return resultado
-
     def créditos_totais(performances):
         resultado = 0
         for performance in performances:
             # soma créditos por volume
-            resultado += creditos_da(performance)
+            resultado += performance.calcula_créditos()
         return resultado
 
     def valor_total(performances):
