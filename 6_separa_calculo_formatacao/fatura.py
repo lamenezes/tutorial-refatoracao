@@ -3,16 +3,16 @@ from dataclasses import dataclass
 
 @dataclass
 class Fatura:
-    pass
+    cliente: str
 
 
 def fatura(dados_demonstrativo, obras):
-    fatura = Fatura()
+    fatura = Fatura(cliente=dados_demonstrativo["cliente"])
     return renderiza_texto_plano(fatura, dados_demonstrativo, obras)
 
 
 def renderiza_texto_plano(fatura, dados_demonstrativo, obras):
-    resultado = f"Recibo para {dados_demonstrativo['cliente']}\n"
+    resultado = f"Recibo para {fatura.cliente}\n"
 
     def obra_da(performance):
         return obras[performance["id_obra"]]
