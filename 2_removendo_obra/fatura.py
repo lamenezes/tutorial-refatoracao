@@ -6,19 +6,19 @@ def fatura(performance, obras):
     def obra_da(performance):
         return obras[performance["id_obra"]]
 
-    def valor_da(performance, obra):
+    def valor_da(performance):
         resultado = 0
-        if obra["tipo"] == "tragédia":
+        if obra_da(performance)["tipo"] == "tragédia":
             resultado = 40_000
             if performance["espectadores"] > 30:
                 resultado += 1000 * (performance["espectadores"] - 30)
-        elif obra["tipo"] == "comédia":
+        elif obra_da(performance)["tipo"] == "comédia":
             resultado = 30_000
             if performance["espectadores"] > 20:
                 resultado += 10000 + 500 * (performance["espectadores"] - 20)
             resultado += 300 * performance["espectadores"]
         else:
-            raise ValueError(f"Tipo de obra desconhecido {obra['tipo']}")
+            raise ValueError(f"Tipo de obra desconhecido {obra_da(performance)['tipo']}")
 
         return resultado
 
@@ -29,8 +29,8 @@ def fatura(performance, obras):
         if obra_da(performance)["tipo"] == "comédia":
             créditos += performance["espectadores"] // 5
 
-        resultado += f"  {obra_da(performance)['nome']}: R$ {valor_da(performance, obra_da(performance))/ 100:.2f} ({performance['espectadores']} lugares)\n"
-        valor_total += valor_da(performance, obra_da(performance))
+        resultado += f"  {obra_da(performance)['nome']}: R$ {valor_da(performance)/ 100:.2f} ({performance['espectadores']} lugares)\n"
+        valor_total += valor_da(performance)
 
     resultado += f"Valor a pagar é de R$ {valor_total / 100:.2f}\n"
     resultado += f"Você ganhou {créditos} créditos\n"
