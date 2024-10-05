@@ -41,9 +41,8 @@ def fatura(demonstrativo, obras):
         resultado += f"  {obra_da(performance)['nome']}: {brl(valor_da(performance)/ 100)} ({performance['espectadores']} lugares)\n"
         valor_total += valor_da(performance)
 
-    total_créditos = créditos_totais(demonstrativo["performances"])
     resultado += f"Valor a pagar é de {brl(valor_total / 100)}\n"
-    resultado += f"Você ganhou {total_créditos} créditos\n"
+    resultado += f"Você ganhou {créditos_totais(demonstrativo["performances"])} créditos\n"
     return resultado
 
 
