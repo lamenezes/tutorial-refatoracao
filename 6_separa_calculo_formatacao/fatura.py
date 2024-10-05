@@ -4,14 +4,15 @@ from dataclasses import dataclass
 @dataclass
 class Fatura:
     cliente: str
+    performances: list[dict]
 
 
 def fatura(dados_demonstrativo, obras):
-    fatura = Fatura(cliente=dados_demonstrativo["cliente"])
-    return renderiza_texto_plano(fatura, dados_demonstrativo, obras)
+    fatura = Fatura(cliente=dados_demonstrativo["cliente"], performances=dados_demonstrativo["performances"])
+    return renderiza_texto_plano(fatura, obras)
 
 
-def renderiza_texto_plano(fatura, dados_demonstrativo, obras):
+def renderiza_texto_plano(fatura, obras):
     resultado = f"Recibo para {fatura.cliente}\n"
 
     def obra_da(performance):
@@ -53,13 +54,13 @@ def renderiza_texto_plano(fatura, dados_demonstrativo, obras):
             resultado += valor_da(performance)
         return resultado
 
-    for performance in dados_demonstrativo["performances"]:
+    for performance in fatura.performances:
         # soma créditos por volume
         resultado += f"  {obra_da(performance)['nome']}: {brl(valor_da(performance)/ 100)} ({performance['espectadores']} lugares)\n"
 
-    valor_total = valor_total(dados_demonstrativo["performances"])
+    valor_total = valor_total(fatura.performances)
     resultado += f"Valor a pagar é de {brl(valor_total / 100)}\n"
-    resultado += f"Você ganhou {créditos_totais(dados_demonstrativo["performances"])} créditos\n"
+    resultado += f"Você ganhou {créditos_totais(fatura.performances)} créditos\n"
     return resultado
 
 
