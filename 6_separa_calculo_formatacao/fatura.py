@@ -1,4 +1,8 @@
 def fatura(demonstrativo, obras):
+    return renderiza_texto_plano(demonstrativo, obras)
+
+
+def renderiza_texto_plano(demonstrativo, obras):
     resultado = f"Recibo para {demonstrativo['cliente']}\n"
 
     def obra_da(performance):
