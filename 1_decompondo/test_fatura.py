@@ -30,10 +30,10 @@ def test_conta():
 def test_conta_lendo_arquivo():
     import json
 
-    demonstrativo = json.load(open("demonstrativo.json"))
+    dados_demonstrativo = json.load(open("demonstrativo.json"))
     obras = json.load(open("obras.json"))
 
-    assert fatura(demonstrativo[0], obras) == (
+    assert fatura(dados_demonstrativo[0], obras) == (
         "Recibo para Empresão\n"
         "  Hamlet: R$ 650.00 (55 lugares)\n"
         "  Sonho de uma noite de verão: R$ 580.00 (35 lugares)\n"

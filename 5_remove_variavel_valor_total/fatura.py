@@ -1,5 +1,5 @@
-def fatura(demonstrativo, obras):
-    resultado = f"Recibo para {demonstrativo['cliente']}\n"
+def fatura(dados_demonstrativo, obras):
+    resultado = f"Recibo para {dados_demonstrativo['cliente']}\n"
 
     def obra_da(performance):
         return obras[performance["id_obra"]]
@@ -29,24 +29,24 @@ def fatura(demonstrativo, obras):
 
     def créditos_totais(performances):
         resultado = 0
-        for performance in demonstrativo["performances"]:
+        for performance in performances:
             # soma créditos por volume
             resultado += creditos_da(performance)
         return resultado
 
     def valor_total(performances):
         resultado = 0
-        for performance in demonstrativo["performances"]:
+        for performance in performances:
             resultado += valor_da(performance)
         return resultado
 
-    for performance in demonstrativo["performances"]:
+    for performance in dados_demonstrativo["performances"]:
         # soma créditos por volume
         resultado += f"  {obra_da(performance)['nome']}: {brl(valor_da(performance)/ 100)} ({performance['espectadores']} lugares)\n"
 
-    valor_total = valor_total(demonstrativo["performances"])
+    valor_total = valor_total(dados_demonstrativo["performances"])
     resultado += f"Valor a pagar é de {brl(valor_total / 100)}\n"
-    resultado += f"Você ganhou {créditos_totais(demonstrativo["performances"])} créditos\n"
+    resultado += f"Você ganhou {créditos_totais(dados_demonstrativo["performances"])} créditos\n"
     return resultado
 
 
