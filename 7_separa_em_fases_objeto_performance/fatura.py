@@ -6,6 +6,13 @@ class Performance:
     id_obra: str
     espectadores: int
 
+    @classmethod
+    def cria_varias(cls, dados_performances):
+        performances = []
+        for dados in dados_performances:
+            performances.append(Performance(**dados))
+        return performances
+
 
 @dataclass
 class Fatura:
@@ -13,10 +20,7 @@ class Fatura:
     performances: list[dict]
 
     def __post_init__(self):
-        performances = []
-        for performance in self.performances:
-            performances.append(Performance(**performance))
-        self.performances = performances
+        self.performances = Performance.cria_varias(self.performances)
 
 
 def fatura(dados_demonstrativo, obras):
