@@ -1,4 +1,4 @@
-def gera_fatura(performance, obras):
+def fatura(performance, obras):
     valor_total = 0
     créditos = 0
     resultado = f"Recibo para {performance['cliente']}\n"

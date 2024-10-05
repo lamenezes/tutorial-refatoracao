@@ -1,23 +1,26 @@
-def gera_fatura(performance, obras):
+def fatura(performance, obras):
     valor_total = 0
     créditos = 0
     resultado = f"Recibo para {performance['cliente']}\n"
 
-    for performance in performance["performances"]:
-        obra = obras[performance["id_obra"]]
-        valor_atual = 0
-
+    def valor_da(performance, obra):
+        resultado = 0
         if obra["tipo"] == "tragédia":
-            valor_atual = 40_000
+            resultado = 40_000
             if performance["espectadores"] > 30:
-                valor_atual += 1000 * (performance["espectadores"] - 30)
+                resultado += 1000 * (performance["espectadores"] - 30)
         elif obra["tipo"] == "comédia":
-            valor_atual = 30_000
+            resultado = 30_000
             if performance["espectadores"] > 20:
-                valor_atual += 10000 + 500 * (performance["espectadores"] - 20)
-            valor_atual += 300 * performance["espectadores"]
+                resultado += 10000 + 500 * (performance["espectadores"] - 20)
+            resultado += 300 * performance["espectadores"]
         else:
             raise ValueError(f"Tipo de obra desconhecido {obra['tipo']}")
+
+        return resultado
+
+    for performance in performance["performances"]:
+        obra = obras[performance["id_obra"]]
 
         # soma créditos por volume
         créditos += max(performance["espectadores"] - 30, 0)
@@ -25,8 +28,8 @@ def gera_fatura(performance, obras):
         if obra["tipo"] == "comédia":
             créditos += performance["espectadores"] // 5
 
-        resultado += f"  {obra['nome']}: R$ {valor_atual / 100:.2f} ({performance['espectadores']} lugares)\n"
-        valor_total += valor_atual
+        resultado += f"  {obra['nome']}: R$ {valor_da(performance, obra)/ 100:.2f} ({performance['espectadores']} lugares)\n"
+        valor_total += valor_da(performance, obra)
 
     resultado += f"Valor a pagar é de R$ {valor_total / 100:.2f}\n"
     resultado += f"Você ganhou {créditos} créditos\n"
