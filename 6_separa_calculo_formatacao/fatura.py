@@ -1,0 +1,54 @@
+def fatura(demonstrativo, obras):
+    resultado = f"Recibo para {demonstrativo['cliente']}\n"
+
+    def obra_da(performance):
+        return obras[performance["id_obra"]]
+
+    def valor_da(performance):
+        resultado = 0
+        if obra_da(performance)["tipo"] == "tragédia":
+            resultado = 40_000
+            if performance["espectadores"] > 30:
+                resultado += 1000 * (performance["espectadores"] - 30)
+        elif obra_da(performance)["tipo"] == "comédia":
+            resultado = 30_000
+            if performance["espectadores"] > 20:
+                resultado += 10000 + 500 * (performance["espectadores"] - 20)
+            resultado += 300 * performance["espectadores"]
+        else:
+            raise ValueError(f"Tipo de obra desconhecido {obra_da(performance)['tipo']}")
+
+        return resultado
+
+    def creditos_da(performance):
+        resultado = max(performance["espectadores"] - 30, 0)
+        # soma um crédito extra para cada dez espectadores de comédia
+        if obra_da(performance)["tipo"] == "comédia":
+            resultado += performance["espectadores"] // 5
+        return resultado
+
+    def créditos_totais(performances):
+        resultado = 0
+        for performance in demonstrativo["performances"]:
+            # soma créditos por volume
+            resultado += creditos_da(performance)
+        return resultado
+
+    def valor_total(performances):
+        resultado = 0
+        for performance in demonstrativo["performances"]:
+            resultado += valor_da(performance)
+        return resultado
+
+    for performance in demonstrativo["performances"]:
+        # soma créditos por volume
+        resultado += f"  {obra_da(performance)['nome']}: {brl(valor_da(performance)/ 100)} ({performance['espectadores']} lugares)\n"
+
+    valor_total = valor_total(demonstrativo["performances"])
+    resultado += f"Valor a pagar é de {brl(valor_total / 100)}\n"
+    resultado += f"Você ganhou {créditos_totais(demonstrativo["performances"])} créditos\n"
+    return resultado
+
+
+def brl(numero):
+    return f"R$ {numero:.2f}"
