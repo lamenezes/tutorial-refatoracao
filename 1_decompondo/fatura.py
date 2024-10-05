@@ -3,7 +3,7 @@ def fatura(dados_demonstrativo, obras):
     total_créditos = 0
     resultado = f"Recibo para {dados_demonstrativo['cliente']}\n"
 
-    def valor_da(performance, obra):
+    def calcula_valor(performance, obra):
         resultado = 0
         if obra["tipo"] == "tragédia":
             resultado = 40_000
@@ -28,8 +28,8 @@ def fatura(dados_demonstrativo, obras):
         if obra["tipo"] == "comédia":
             total_créditos += performance["espectadores"] // 5
 
-        resultado += f"  {obra['nome']}: R$ {valor_da(performance, obra) / 100:.2f} ({performance['espectadores']} lugares)\n"
-        valor_total += valor_da(performance, obra)
+        resultado += f"  {obra['nome']}: R$ {calcula_valor(performance, obra) / 100:.2f} ({performance['espectadores']} lugares)\n"
+        valor_total += calcula_valor(performance, obra)
 
     resultado += f"Valor a pagar é de R$ {valor_total / 100:.2f}\n"
     resultado += f"Você ganhou {total_créditos} créditos\n"

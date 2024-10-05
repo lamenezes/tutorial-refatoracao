@@ -5,7 +5,7 @@ def fatura(dados_demonstrativo, obras):
     def obra_da(performance):
         return obras[performance["id_obra"]]
 
-    def valor_da(performance):
+    def calcula_valor(performance):
         resultado = 0
         if obra_da(performance)["tipo"] == "tragédia":
             resultado = 40_000
@@ -38,8 +38,8 @@ def fatura(dados_demonstrativo, obras):
         return resultado
 
     for performance in dados_demonstrativo["performances"]:
-        resultado += f"  {obra_da(performance)['nome']}: {brl(valor_da(performance) / 100)} ({performance['espectadores']} lugares)\n"
-        valor_total += valor_da(performance)
+        resultado += f"  {obra_da(performance)['nome']}: {brl(calcula_valor(performance) / 100)} ({performance['espectadores']} lugares)\n"
+        valor_total += calcula_valor(performance)
 
     resultado += f"Valor a pagar é de {brl(valor_total / 100)}\n"
     resultado += (

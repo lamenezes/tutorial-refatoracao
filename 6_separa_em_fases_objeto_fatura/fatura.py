@@ -15,7 +15,7 @@ def renderiza_texto_plano(fatura, obras):
     def obra_da(performance):
         return obras[performance["id_obra"]]
 
-    def valor_da(performance):
+    def calcula_valor(performance):
         resultado = 0
         if obra_da(performance)["tipo"] == "tragédia":
             resultado = 40_000
@@ -50,11 +50,11 @@ def renderiza_texto_plano(fatura, obras):
     def valor_total(fatura):
         resultado = 0
         for performance in fatura.performances:
-            resultado += valor_da(performance)
+            resultado += calcula_valor(performance)
         return resultado
 
     for performance in fatura.performances:
-        resultado += f"  {obra_da(performance)['nome']}: {brl(valor_da(performance) / 100)} ({performance['espectadores']} lugares)\n"
+        resultado += f"  {obra_da(performance)['nome']}: {brl(calcula_valor(performance) / 100)} ({performance['espectadores']} lugares)\n"
 
     resultado += f"Valor a pagar é de {brl(valor_total(fatura) / 100)}\n"
     resultado += f"Você ganhou {créditos_totais(fatura)} créditos\n"
