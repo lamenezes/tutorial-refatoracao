@@ -23,16 +23,14 @@ def fatura(performance, obras):
         return resultado
 
     for performance in performance["performances"]:
-        obra = obra_da(performance)
-
         # soma créditos por volume
         créditos += max(performance["espectadores"] - 30, 0)
         # soma um crédito extra para cada dez espectadores de comédia
-        if obra["tipo"] == "comédia":
+        if obra_da(performance)["tipo"] == "comédia":
             créditos += performance["espectadores"] // 5
 
-        resultado += f"  {obra['nome']}: R$ {valor_da(performance, obra)/ 100:.2f} ({performance['espectadores']} lugares)\n"
-        valor_total += valor_da(performance, obra)
+        resultado += f"  {obra_da(performance)['nome']}: R$ {valor_da(performance, obra_da(performance))/ 100:.2f} ({performance['espectadores']} lugares)\n"
+        valor_total += valor_da(performance, obra_da(performance))
 
     resultado += f"Valor a pagar é de R$ {valor_total / 100:.2f}\n"
     resultado += f"Você ganhou {créditos} créditos\n"
