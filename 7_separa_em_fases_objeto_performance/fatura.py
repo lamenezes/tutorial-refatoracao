@@ -12,16 +12,16 @@ def fatura(dados_demonstrativo, obras):
 def renderiza_texto_plano(fatura, obras):
     resultado = f"Recibo para {fatura.cliente}\n"
 
-    def créditos_totais(performances):
+    def créditos_totais(fatura):
         resultado = 0
-        for performance in performances:
+        for performance in fatura.performances:
             # soma créditos por volume
             resultado += performance.calcula_créditos()
         return resultado
 
-    def valor_total(performances):
+    def valor_total(fatura):
         resultado = 0
-        for performance in performances:
+        for performance in fatura.performances:
             resultado += performance.calcula_valor()
         return resultado
 
@@ -29,9 +29,9 @@ def renderiza_texto_plano(fatura, obras):
         # soma créditos por volume
         resultado += f"  {performance.obra['nome']}: {brl(performance.calcula_valor()/ 100)} ({performance.espectadores} lugares)\n"
 
-    valor_total = valor_total(fatura.performances)
+    valor_total = valor_total(fatura)
     resultado += f"Valor a pagar é de {brl(valor_total / 100)}\n"
-    resultado += f"Você ganhou {créditos_totais(fatura.performances)} créditos\n"
+    resultado += f"Você ganhou {créditos_totais(fatura)} créditos\n"
     return resultado
 
 
