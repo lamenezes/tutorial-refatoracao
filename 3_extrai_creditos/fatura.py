@@ -1,6 +1,6 @@
 def fatura(demonstrativo, obras):
     valor_total = 0
-    créditos = 0
+    total_créditos = 0
     resultado = f"Recibo para {demonstrativo['cliente']}\n"
 
     def obra_da(performance):
@@ -23,20 +23,20 @@ def fatura(demonstrativo, obras):
         return resultado
 
     def creditos_da(performance):
-        créditos = max(performance["espectadores"] - 30, 0)
+        resultado = max(performance["espectadores"] - 30, 0)
         # soma um crédito extra para cada dez espectadores de comédia
         if obra_da(performance)["tipo"] == "comédia":
-            créditos += performance["espectadores"] // 5
-        return créditos
+            resultado += performance["espectadores"] // 5
+        return resultado
 
     for performance in demonstrativo["performances"]:
         # soma créditos por volume
-        créditos += creditos_da(performance)
+        total_créditos += creditos_da(performance)
         resultado += f"  {obra_da(performance)['nome']}: {brl(valor_da(performance)/ 100)} ({performance['espectadores']} lugares)\n"
         valor_total += valor_da(performance)
 
     resultado += f"Valor a pagar é de {brl(valor_total / 100)}\n"
-    resultado += f"Você ganhou {créditos} créditos\n"
+    resultado += f"Você ganhou {total_créditos} créditos\n"
     return resultado
 
 
