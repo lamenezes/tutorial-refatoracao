@@ -5,7 +5,7 @@ test:
 	pytest 3_extrai_creditos/test_fatura.py
 	pytest 4_remove_variavel_creditos/test_fatura.py
 	pytest 5_remove_variavel_valor_total/test_fatura.py
-	pytest 6_separa_calculo_formatacao/test_fatura.py
+	pytest 6_separa_em_fases_objeto_fatura/test_fatura.py
 
 clean:
 	find . -name "*.pyc" -delete
