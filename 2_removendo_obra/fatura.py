@@ -18,7 +18,9 @@ def fatura(dados_demonstrativo, obras):
                 resultado += 10000 + 500 * (performance["espectadores"] - 20)
             resultado += 300 * performance["espectadores"]
         else:
-            raise ValueError(f"Tipo de obra desconhecido {obra_da(performance)['tipo']}")
+            raise ValueError(
+                f"Tipo de obra desconhecido {obra_da(performance)['tipo']}"
+            )
 
         return resultado
 
@@ -29,7 +31,7 @@ def fatura(dados_demonstrativo, obras):
         if obra_da(performance)["tipo"] == "comédia":
             total_créditos += performance["espectadores"] // 5
 
-        resultado += f"  {obra_da(performance)['nome']}: R$ {valor_da(performance)/ 100:.2f} ({performance['espectadores']} lugares)\n"
+        resultado += f"  {obra_da(performance)['nome']}: R$ {valor_da(performance) / 100:.2f} ({performance['espectadores']} lugares)\n"
         valor_total += valor_da(performance)
 
     resultado += f"Valor a pagar é de R$ {valor_total / 100:.2f}\n"

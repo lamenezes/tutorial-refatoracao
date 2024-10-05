@@ -2,7 +2,10 @@ from dataclasses import dataclass
 
 
 def fatura(dados_demonstrativo, obras):
-    fatura = Fatura(cliente=dados_demonstrativo["cliente"], performances=dados_demonstrativo["performances"])
+    fatura = Fatura(
+        cliente=dados_demonstrativo["cliente"],
+        performances=dados_demonstrativo["performances"],
+    )
     return renderiza_texto_plano(fatura, obras)
 
 
@@ -24,7 +27,9 @@ def renderiza_texto_plano(fatura, obras):
                 resultado += 10000 + 500 * (performance["espectadores"] - 20)
             resultado += 300 * performance["espectadores"]
         else:
-            raise ValueError(f"Tipo de obra desconhecido {obra_da(performance)['tipo']}")
+            raise ValueError(
+                f"Tipo de obra desconhecido {obra_da(performance)['tipo']}"
+            )
 
         return resultado
 
@@ -49,7 +54,7 @@ def renderiza_texto_plano(fatura, obras):
         return resultado
 
     for performance in fatura.performances:
-        resultado += f"  {obra_da(performance)['nome']}: {brl(valor_da(performance)/ 100)} ({performance['espectadores']} lugares)\n"
+        resultado += f"  {obra_da(performance)['nome']}: {brl(valor_da(performance) / 100)} ({performance['espectadores']} lugares)\n"
 
     resultado += f"Valor a pagar é de {brl(valor_total(fatura) / 100)}\n"
     resultado += f"Você ganhou {créditos_totais(fatura)} créditos\n"

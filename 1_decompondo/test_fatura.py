@@ -14,7 +14,7 @@ def test_conta():
             {"id_obra": "hamlet", "espectadores": 81},
             {"id_obra": "sonho-verão", "espectadores": 52},
             {"id_obra": "hamlet", "espectadores": 63},
-        ]
+        ],
     }
 
     assert fatura(perf, OBRAS) == (
