@@ -1,8 +1,17 @@
+from dataclasses import dataclass
+
+
+@dataclass
+class Fatura:
+    pass
+
+
 def fatura(dados_demonstrativo, obras):
-    return renderiza_texto_plano(dados_demonstrativo, obras)
+    fatura = Fatura()
+    return renderiza_texto_plano(fatura, dados_demonstrativo, obras)
 
 
-def renderiza_texto_plano(dados_demonstrativo, obras):
+def renderiza_texto_plano(fatura, dados_demonstrativo, obras):
     resultado = f"Recibo para {dados_demonstrativo['cliente']}\n"
 
     def obra_da(performance):
