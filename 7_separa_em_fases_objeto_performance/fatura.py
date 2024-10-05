@@ -12,13 +12,6 @@ def fatura(dados_demonstrativo, obras):
 def renderiza_texto_plano(fatura, obras):
     resultado = f"Recibo para {fatura.cliente}\n"
 
-    def créditos_totais(fatura):
-        resultado = 0
-        for performance in fatura.performances:
-            # soma créditos por volume
-            resultado += performance.calcula_créditos()
-        return resultado
-
     def valor_total(fatura):
         resultado = 0
         for performance in fatura.performances:
@@ -31,7 +24,7 @@ def renderiza_texto_plano(fatura, obras):
 
     valor_total = valor_total(fatura)
     resultado += f"Valor a pagar é de {brl(valor_total / 100)}\n"
-    resultado += f"Você ganhou {créditos_totais(fatura)} créditos\n"
+    resultado += f"Você ganhou {fatura.calcula_creditos()} créditos\n"
     return resultado
 
 
@@ -68,7 +61,7 @@ class Performance:
 
         return resultado
 
-    def calcula_créditos(self):
+    def calcula_creditos(self):
         resultado = max(self.espectadores - 30, 0)
         # soma um crédito extra para cada dez espectadores de comédia
         if self.obra["tipo"] == "comédia":
@@ -80,6 +73,13 @@ class Performance:
 class Fatura:
     cliente: str
     performances: list[Performance]
+
+    def calcula_creditos(self):
+        resultado = 0
+        for performance in self.performances:
+            # soma créditos por volume
+            resultado += performance.calcula_creditos()
+        return resultado
 
 
 def brl(numero):
