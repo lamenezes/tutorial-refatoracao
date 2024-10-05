@@ -1,7 +1,7 @@
-def fatura(performance, obras):
+def fatura(demonstrativo, obras):
     valor_total = 0
     créditos = 0
-    resultado = f"Recibo para {performance['cliente']}\n"
+    resultado = f"Recibo para {demonstrativo['cliente']}\n"
 
     def valor_da(performance, obra):
         resultado = 0
@@ -19,7 +19,7 @@ def fatura(performance, obras):
 
         return resultado
 
-    for performance in performance["performances"]:
+    for performance in demonstrativo["performances"]:
         obra = obras[performance["id_obra"]]
 
         # soma créditos por volume

@@ -30,7 +30,7 @@ def test_conta():
 def test_conta_lendo_arquivo():
     import json
 
-    performances = json.load(open("performances.json"))
+    performances = json.load(open("demonstrativo.json"))
     obras = json.load(open("obras.json"))
 
     assert fatura(performances[0], obras) == (
