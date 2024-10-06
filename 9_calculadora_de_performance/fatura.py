@@ -46,11 +46,7 @@ class Performance:
         self.valor = CalculadoraPerformance(self).valor
 
     def calcula_creditos(self):
-        resultado = max(self.espectadores - 30, 0)
-        # soma um crédito extra para cada dez espectadores de comédia
-        if self.obra["tipo"] == "comédia":
-            resultado += self.espectadores // 5
-        return resultado
+        return CalculadoraPerformance(self).creditos
 
 
 class CalculadoraPerformance:
