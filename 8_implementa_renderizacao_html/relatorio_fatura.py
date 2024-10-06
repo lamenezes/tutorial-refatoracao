@@ -1,4 +1,4 @@
-from fatura import Fatura, Performance
+from fatura import Fatura
 
 
 def gera_relatorio_fatura(dados_demonstrativo, obras):
@@ -32,10 +32,11 @@ def renderiza_texto_html(fatura, obras):
         resultado += f"<td>{performance.espectadores}</td><td>{brl(performance.calcula_valor() / 100)}</td></tr>\n"
 
     resultado += "</table>\n"
-    resultado += f"<p>Valor a pagar é de {brl(fatura.calcula_valor_total() / 100)}</p>\n"
+    resultado += (
+        f"<p>Valor a pagar é de {brl(fatura.calcula_valor_total() / 100)}</p>\n"
+    )
     resultado += f"<p>Você ganhou {fatura.calcula_creditos()} créditos</p>\n"
     return resultado
-
 
 
 def brl(numero):

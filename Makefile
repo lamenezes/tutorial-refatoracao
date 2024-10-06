@@ -11,6 +11,10 @@ test:
 	pytest 9_calculadora_de_performance/test_fatura.py
 	pytest 10_calculadora_polimorfica/test_fatura.py
 
+lint:
+	ruff check . --fix
+	black .
+
 clean:
 	find . -name "*.pyc" -delete
 	find . -name "__pycache__" | xargs rm -rf

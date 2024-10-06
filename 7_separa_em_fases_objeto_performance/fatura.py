@@ -25,7 +25,7 @@ def renderiza_texto_plano(fatura, obras):
 @dataclass
 class Fatura:
     cliente: str
-    performances: list['Performance']
+    performances: list["Performance"]
 
     def calcula_creditos(self):
         resultado = 0

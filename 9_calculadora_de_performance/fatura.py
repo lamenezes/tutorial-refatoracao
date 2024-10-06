@@ -4,7 +4,7 @@ from dataclasses import dataclass
 @dataclass
 class Fatura:
     cliente: str
-    performances: list['Performance']
+    performances: list["Performance"]
 
     @classmethod
     def cria(cls, dados, obras):
@@ -66,7 +66,9 @@ class CalculadoraPerformance:
                 resultado += 10000 + 500 * (self.performance.espectadores - 20)
             resultado += 300 * self.performance.espectadores
         else:
-            raise ValueError(f"Tipo de obra desconhecido {self.performance.obra['tipo']}")
+            raise ValueError(
+                f"Tipo de obra desconhecido {self.performance.obra['tipo']}"
+            )
 
         return resultado
 

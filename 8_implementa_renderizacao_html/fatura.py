@@ -4,7 +4,7 @@ from dataclasses import dataclass
 @dataclass
 class Fatura:
     cliente: str
-    performances: list['Performance']
+    performances: list["Performance"]
 
     @classmethod
     def cria(cls, dados, obras):

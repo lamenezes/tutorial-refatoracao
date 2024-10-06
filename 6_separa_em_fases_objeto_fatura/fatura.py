@@ -33,9 +33,7 @@ def calcula_valor(performance):
             resultado += 10000 + 500 * (performance["espectadores"] - 20)
         resultado += 300 * performance["espectadores"]
     else:
-        raise ValueError(
-            f"Tipo de obra desconhecido {performance['obra']['tipo']}"
-        )
+        raise ValueError(f"Tipo de obra desconhecido {performance['obra']['tipo']}")
 
     return resultado
 
