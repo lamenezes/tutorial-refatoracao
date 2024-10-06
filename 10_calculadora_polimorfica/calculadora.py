@@ -1,3 +1,7 @@
+def cria_calculadora_performance(performance):
+    return CalculadoraPerformance(performance)
+
+
 class CalculadoraPerformance:
     def __init__(self, performance):
         self.performance = performance

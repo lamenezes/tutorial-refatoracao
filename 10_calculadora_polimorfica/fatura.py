@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from calculadora import CalculadoraPerformance
+from calculadora import cria_calculadora_performance
 
 
 @dataclass
@@ -45,6 +45,6 @@ class Performance:
         return performances
 
     def __post_init__(self):
-        calculadora = CalculadoraPerformance(self)
+        calculadora = cria_calculadora_performance(self)
         self.valor = calculadora.valor
         self.creditos = calculadora.creditos
