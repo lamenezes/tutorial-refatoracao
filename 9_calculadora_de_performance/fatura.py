@@ -73,3 +73,11 @@ class CalculadoraPerformance:
             raise ValueError(f"Tipo de obra desconhecido {self.performance.obra['tipo']}")
 
         return resultado
+
+    @property
+    def creditos(self):
+        resultado = max(self.performance.espectadores - 30, 0)
+        # soma um crédito extra para cada dez espectadores de comédia
+        if self.performance.obra["tipo"] == "comédia":
+            resultado += self.performance.espectadores // 5
+        return resultado
