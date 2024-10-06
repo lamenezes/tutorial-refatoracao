@@ -8,6 +8,7 @@ test:
 	pytest 6_separa_em_fases_objeto_fatura/test_fatura.py
 	pytest 7_separa_em_fases_objeto_performance/test_fatura.py
 	pytest 8_implementa_renderizacao_html/test_fatura.py
+	pytest 9_calculadora_de_performance/test_fatura.py
 
 clean:
 	find . -name "*.pyc" -delete

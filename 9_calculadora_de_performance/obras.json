@@ -1,0 +1,5 @@
+{
+  "hamlet": {"nome": "Hamlet", "tipo": "tragédia"},
+  "sonho-verão": {"nome": "Sonho de uma noite de verão", "tipo": "comédia"},
+  "otelo": {"nome": "Otelo", "tipo": "tragédia"}
+}
