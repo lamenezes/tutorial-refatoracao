@@ -16,11 +16,7 @@ class CalculadoraPerformance:
 
     @property
     def creditos(self):
-        resultado = max(self.performance.espectadores - 30, 0)
-        # soma um crédito extra para cada dez espectadores de comédia
-        if self.performance.obra["tipo"] == "comédia":
-            resultado += self.performance.espectadores // 5
-        return resultado
+        return max(self.performance.espectadores - 30, 0)
 
 
 class CalculadoraComedia(CalculadoraPerformance):
@@ -31,6 +27,12 @@ class CalculadoraComedia(CalculadoraPerformance):
             resultado += 10000 + 500 * (self.performance.espectadores - 20)
         resultado += 300 * self.performance.espectadores
         return resultado
+
+    @property
+    def creditos(self):
+        if self.performance.obra["tipo"] == "comédia":
+            return super().creditos + (self.performance.espectadores // 5)
+        return super().creditos
 
 
 class CalculadoraTragedia(CalculadoraPerformance):
