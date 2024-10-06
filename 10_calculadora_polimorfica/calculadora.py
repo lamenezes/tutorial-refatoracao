@@ -39,7 +39,14 @@ class CalculadoraPerformance:
 
 
 class CalculadoraComedia(CalculadoraPerformance):
-    pass
+    @property
+    def valor(self):
+        resultado = 30_000
+        if self.performance.espectadores > 20:
+            resultado += 10000 + 500 * (self.performance.espectadores - 20)
+        resultado += 300 * self.performance.espectadores
+        return resultado
+
 
 
 class CalculadoraTragedia(CalculadoraPerformance):
