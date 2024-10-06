@@ -2,12 +2,7 @@ from fatura import Fatura, Performance
 
 
 def gera_relatorio_fatura(dados_demonstrativo, obras):
-    fatura = Fatura(
-        cliente=dados_demonstrativo["cliente"],
-        performances=Performance.cria_varias(
-            dados_demonstrativo["performances"], obras
-        ),
-    )
+    fatura = Fatura.cria(dados_demonstrativo, obras)
     return renderiza_texto_plano(fatura, obras)
 
 
@@ -23,12 +18,7 @@ def renderiza_texto_plano(fatura, obras):
 
 
 def gera_relatorio_fatura_html(dados_demonstrativo, obras):
-    fatura = Fatura(
-        cliente=dados_demonstrativo["cliente"],
-        performances=Performance.cria_varias(
-            dados_demonstrativo["performances"], obras
-        ),
-    )
+    fatura = Fatura.cria(dados_demonstrativo, obras)
     return renderiza_texto_html(fatura, obras)
 
 

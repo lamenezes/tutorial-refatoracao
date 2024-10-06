@@ -6,6 +6,13 @@ class Fatura:
     cliente: str
     performances: list['Performance']
 
+    @classmethod
+    def cria(cls, dados, obras):
+        return cls(
+            cliente=dados["cliente"],
+            performances=Performance.cria_varias(dados["performances"], obras),
+        )
+
     def calcula_creditos(self):
         resultado = 0
         for performance in self.performances:
