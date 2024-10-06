@@ -1,4 +1,4 @@
-from fatura import fatura
+from relatorio_fatura import gera_relatorio_fatura
 
 OBRAS = {
     "hamlet": {"nome": "Hamlet", "tipo": "tragédia"},
@@ -17,7 +17,7 @@ def test_conta():
         ],
     }
 
-    assert fatura(perf, OBRAS) == (
+    assert gera_relatorio_fatura(perf, OBRAS) == (
         "Recibo para Clientíssimo\n"
         "  Hamlet: R$ 910.00 (81 lugares)\n"
         "  Sonho de uma noite de verão: R$ 716.00 (52 lugares)\n"
@@ -33,7 +33,7 @@ def test_conta_lendo_arquivo():
     performances = json.load(open("demonstrativo.json"))
     obras = json.load(open("obras.json"))
 
-    assert fatura(performances[0], obras) == (
+    assert gera_relatorio_fatura(performances[0], obras) == (
         "Recibo para Empresão\n"
         "  Hamlet: R$ 650.00 (55 lugares)\n"
         "  Sonho de uma noite de verão: R$ 580.00 (35 lugares)\n"
