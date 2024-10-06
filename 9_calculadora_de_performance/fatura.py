@@ -23,7 +23,7 @@ class Fatura:
     def calcula_valor_total(self):
         resultado = 0
         for performance in self.performances:
-            resultado += performance.calcula_valor()
+            resultado += performance.valor
         return resultado
 
 
@@ -44,9 +44,6 @@ class Performance:
 
     def __post_init__(self):
         self.valor = CalculadoraPerformance(self).valor
-
-    def calcula_valor(self):
-        return CalculadoraPerformance(self).valor
 
     def calcula_creditos(self):
         resultado = max(self.espectadores - 30, 0)

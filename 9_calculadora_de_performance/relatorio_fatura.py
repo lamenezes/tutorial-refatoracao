@@ -10,7 +10,7 @@ def renderiza_texto_plano(fatura, obras):
     resultado = f"Recibo para {fatura.cliente}\n"
 
     for performance in fatura.performances:
-        resultado += f"  {performance.obra['nome']}: {brl(performance.calcula_valor() / 100)} ({performance.espectadores} lugares)\n"
+        resultado += f"  {performance.obra['nome']}: {brl(performance.valor / 100)} ({performance.espectadores} lugares)\n"
 
     resultado += f"Valor a pagar é de {brl(fatura.calcula_valor_total() / 100)}\n"
     resultado += f"Você ganhou {fatura.calcula_creditos()} créditos\n"
@@ -29,7 +29,7 @@ def renderiza_texto_html(fatura, obras):
 
     for performance in fatura.performances:
         resultado += f"<tr><td>{performance.obra['nome']}</td>"
-        resultado += f"<td>{performance.espectadores}</td><td>{brl(performance.calcula_valor() / 100)}</td></tr>\n"
+        resultado += f"<td>{performance.espectadores}</td><td>{brl(performance.valor / 100)}</td></tr>\n"
 
     resultado += "</table>\n"
     resultado += f"<p>Valor a pagar é de {brl(fatura.calcula_valor_total() / 100)}</p>\n"
