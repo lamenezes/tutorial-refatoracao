@@ -13,7 +13,7 @@ test:
 
 lint:
 	ruff check . --fix
-	black .
+	ruff format .
 
 clean:
 	find . -name "*.pyc" -delete
