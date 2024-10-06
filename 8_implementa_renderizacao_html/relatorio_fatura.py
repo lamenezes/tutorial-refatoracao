@@ -22,6 +22,31 @@ def renderiza_texto_plano(fatura, obras):
     return resultado
 
 
+def gera_relatorio_fatura_html(dados_demonstrativo, obras):
+    fatura = Fatura(
+        cliente=dados_demonstrativo["cliente"],
+        performances=Performance.cria_varias(
+            dados_demonstrativo["performances"], obras
+        ),
+    )
+    return renderiza_texto_html(fatura, obras)
+
+
+def renderiza_texto_html(fatura, obras):
+    resultado = f"<h1>Recibo para {fatura.cliente}</h1>\n"
+    resultado += "<table>\n"
+    resultado += "<tr><th>obra</th><th>espectadores</th><th>valor</th>\n"
+
+    for performance in fatura.performances:
+        resultado += f"<tr><td>{performance.obra['nome']}</td>"
+        resultado += f"<td>{performance.espectadores}</td><td>{brl(performance.calcula_valor() / 100)}</td></tr>\n"
+
+    resultado += "</table>\n"
+    resultado += f"<p>Valor a pagar é de {brl(fatura.calcula_valor_total() / 100)}</p>\n"
+    resultado += f"<p>Você ganhou {fatura.calcula_creditos()} créditos</p>\n"
+    return resultado
+
+
 
 def brl(numero):
     return f"R$ {numero:.2f}"
