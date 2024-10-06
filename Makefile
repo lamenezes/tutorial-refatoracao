@@ -19,3 +19,5 @@ clean:
 	find . -name "*.pyc" -delete
 	find . -name "__pycache__" | xargs rm -rf
 	find . -name ".pytest-cache" | xargs rm -rf
+
+runall: clean lint test
