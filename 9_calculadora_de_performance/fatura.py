@@ -33,6 +33,7 @@ class Performance:
     espectadores: int
     obra: dict
     valor: int = None
+    creditos: int = None
 
     @classmethod
     def cria_varias(cls, dados_performances, obras):
@@ -43,10 +44,12 @@ class Performance:
         return performances
 
     def __post_init__(self):
-        self.valor = CalculadoraPerformance(self).valor
+        calculadora = CalculadoraPerformance(self)
+        self.valor = calculadora.valor
+        self.creditos = calculadora.creditos
 
     def calcula_creditos(self):
-        return CalculadoraPerformance(self).creditos
+        return self.creditos
 
 
 class CalculadoraPerformance:
