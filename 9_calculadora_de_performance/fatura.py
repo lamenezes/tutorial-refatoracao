@@ -43,20 +43,7 @@ class Performance:
         return performances
 
     def calcula_valor(self):
-        resultado = 0
-        if self.obra["tipo"] == "tragédia":
-            resultado = 40_000
-            if self.espectadores > 30:
-                resultado += 1000 * (self.espectadores - 30)
-        elif self.obra["tipo"] == "comédia":
-            resultado = 30_000
-            if self.espectadores > 20:
-                resultado += 10000 + 500 * (self.espectadores - 20)
-            resultado += 300 * self.espectadores
-        else:
-            raise ValueError(f"Tipo de obra desconhecido {self.obra['tipo']}")
-
-        return resultado
+        return CalculadoraPerformance(self).valor
 
     def calcula_creditos(self):
         resultado = max(self.espectadores - 30, 0)
