@@ -31,16 +31,19 @@ class Fatura:
 class Performance:
     id_obra: str
     espectadores: int
-    obra: dict = None
+    obra: dict
+    valor: int = None
 
     @classmethod
     def cria_varias(cls, dados_performances, obras):
         performances = []
         for dados in dados_performances:
-            performance = cls(**dados)
-            performance.obra = obras[performance.id_obra]
+            performance = cls(**dados, obra=obras[dados["id_obra"]])
             performances.append(performance)
         return performances
+
+    def __post_init__(self):
+        self.valor = CalculadoraPerformance(self).valor
 
     def calcula_valor(self):
         return CalculadoraPerformance(self).valor
