@@ -26,18 +26,16 @@ def renderiza_texto_plano(fatura, obras):
 class Performance:
     id_obra: str
     espectadores: int
-    obras: list[dict]
+    obra: dict = None
 
     @classmethod
     def cria_varias(cls, dados_performances, obras):
         performances = []
         for dados in dados_performances:
-            performances.append(cls(**dados, obras=obras))
+            performance = cls(**dados)
+            performance.obra = obras[performance.id_obra]
+            performances.append(performance)
         return performances
-
-    @property
-    def obra(self):
-        return self.obras[self.id_obra]
 
     def calcula_valor(self):
         resultado = 0
