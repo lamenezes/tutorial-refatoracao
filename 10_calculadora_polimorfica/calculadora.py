@@ -1,4 +1,8 @@
 def cria_calculadora_performance(performance):
+    if performance.obra["tipo"] == "comédia":
+        return CalculadoraComedia(performance)
+    if performance.obra["tipo"] == "tragédia":
+        return CalculadoraTragedia(performance)
     return CalculadoraPerformance(performance)
 
 
@@ -32,3 +36,11 @@ class CalculadoraPerformance:
         if self.performance.obra["tipo"] == "comédia":
             resultado += self.performance.espectadores // 5
         return resultado
+
+
+class CalculadoraComedia(CalculadoraPerformance):
+    pass
+
+
+class CalculadoraTragedia(CalculadoraPerformance):
+    pass
