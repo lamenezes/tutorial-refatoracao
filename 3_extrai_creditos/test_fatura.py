@@ -7,7 +7,7 @@ OBRAS = {
 }
 
 
-def test_conta():
+def test_fatura():
     perf = {
         "cliente": "Clientíssimo",
         "performances": [
@@ -27,7 +27,7 @@ def test_conta():
     )
 
 
-def test_conta_lendo_arquivo():
+def test_fatura_lendo_arquivo():
     import json
 
     performances = json.load(open("demonstrativo.json"))
