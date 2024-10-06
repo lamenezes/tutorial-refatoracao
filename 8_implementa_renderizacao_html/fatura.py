@@ -23,6 +23,25 @@ def renderiza_texto_plano(fatura, obras):
 
 
 @dataclass
+class Fatura:
+    cliente: str
+    performances: list['Performance']
+
+    def calcula_creditos(self):
+        resultado = 0
+        for performance in self.performances:
+            # soma créditos por volume
+            resultado += performance.calcula_creditos()
+        return resultado
+
+    def calcula_valor_total(self):
+        resultado = 0
+        for performance in self.performances:
+            resultado += performance.calcula_valor()
+        return resultado
+
+
+@dataclass
 class Performance:
     id_obra: str
     espectadores: int
@@ -58,25 +77,6 @@ class Performance:
         # soma um crédito extra para cada dez espectadores de comédia
         if self.obra["tipo"] == "comédia":
             resultado += self.espectadores // 5
-        return resultado
-
-
-@dataclass
-class Fatura:
-    cliente: str
-    performances: list[Performance]
-
-    def calcula_creditos(self):
-        resultado = 0
-        for performance in self.performances:
-            # soma créditos por volume
-            resultado += performance.calcula_creditos()
-        return resultado
-
-    def calcula_valor_total(self):
-        resultado = 0
-        for performance in self.performances:
-            resultado += performance.calcula_valor()
         return resultado
 
 
