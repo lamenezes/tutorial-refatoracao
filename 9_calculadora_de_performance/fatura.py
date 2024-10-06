@@ -17,7 +17,7 @@ class Fatura:
         resultado = 0
         for performance in self.performances:
             # soma créditos por volume
-            resultado += performance.calcula_creditos()
+            resultado += performance.creditos
         return resultado
 
     def calcula_valor_total(self):
@@ -47,9 +47,6 @@ class Performance:
         calculadora = CalculadoraPerformance(self)
         self.valor = calculadora.valor
         self.creditos = calculadora.creditos
-
-    def calcula_creditos(self):
-        return self.creditos
 
 
 class CalculadoraPerformance:
