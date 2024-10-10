@@ -6,7 +6,7 @@ def fatura(dados_demonstrativo, obras):
     for performance in dados_demonstrativo["performances"]:
         obra = obras[performance["id_obra"]]
 
-        def calcula_valor():
+        def calcula_valor(performance, obra):
             valor_atual = 0
             if obra["tipo"] == "tragédia":
                 valor_atual = 40_000
@@ -27,7 +27,7 @@ def fatura(dados_demonstrativo, obras):
         if obra["tipo"] == "comédia":
             total_créditos += performance["espectadores"] // 5
 
-        valor_atual = calcula_valor()
+        valor_atual = calcula_valor(performance, obra)
         resultado += f"  {obra['nome']}: R$ {valor_atual / 100:.2f} ({performance['espectadores']} lugares)\n"
         valor_total += valor_atual
 
