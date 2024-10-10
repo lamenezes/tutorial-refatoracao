@@ -5,19 +5,21 @@ def fatura(dados_demonstrativo, obras):
 
     for performance in dados_demonstrativo["performances"]:
         obra = obras[performance["id_obra"]]
-        valor_atual = 0
 
-        if obra["tipo"] == "tragédia":
-            valor_atual = 40_000
-            if performance["espectadores"] > 30:
-                valor_atual += 1000 * (performance["espectadores"] - 30)
-        elif obra["tipo"] == "comédia":
-            valor_atual = 30_000
-            if performance["espectadores"] > 20:
-                valor_atual += 10000 + 500 * (performance["espectadores"] - 20)
-            valor_atual += 300 * performance["espectadores"]
-        else:
-            raise ValueError(f"Tipo de obra desconhecido {obra['tipo']}")
+        def calcula_valor():
+            valor_atual = 0
+            if obra["tipo"] == "tragédia":
+                valor_atual = 40_000
+                if performance["espectadores"] > 30:
+                    valor_atual += 1000 * (performance["espectadores"] - 30)
+            elif obra["tipo"] == "comédia":
+                valor_atual = 30_000
+                if performance["espectadores"] > 20:
+                    valor_atual += 10000 + 500 * (performance["espectadores"] - 20)
+                valor_atual += 300 * performance["espectadores"]
+            else:
+                raise ValueError(f"Tipo de obra desconhecido {obra['tipo']}")
+            return valor_atual
 
         # soma créditos por volume
         total_créditos += max(performance["espectadores"] - 30, 0)
@@ -25,6 +27,7 @@ def fatura(dados_demonstrativo, obras):
         if obra["tipo"] == "comédia":
             total_créditos += performance["espectadores"] // 5
 
+        valor_atual = calcula_valor()
         resultado += f"  {obra['nome']}: R$ {valor_atual / 100:.2f} ({performance['espectadores']} lugares)\n"
         valor_total += valor_atual
 
