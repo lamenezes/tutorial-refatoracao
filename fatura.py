@@ -3,15 +3,10 @@ def fatura(dados_demonstrativo, obras):
     total_créditos = 0
     resultado = f"Recibo para {dados_demonstrativo['cliente']}\n"
 
-    def formata_brl(valor):
-        return f"R$ {valor / 100:.2f}"
-
     for performance in dados_demonstrativo["performances"]:
         performance["obra"] = obras[performance["id_obra"]]
-
         total_créditos += calcula_creditos(performance)
         valor_atual = calcula_valor(performance)
-
         resultado += f"  {performance['obra']['nome']}: {formata_brl(valor_atual)} ({performance['espectadores']} lugares)\n"
         valor_total += valor_atual
 
@@ -44,3 +39,7 @@ def calcula_creditos(performance):
     if performance["obra"]["tipo"] == "comédia":
         total_créditos += performance["espectadores"] // 5
     return total_créditos
+
+
+def formata_brl(valor):
+    return f"R$ {valor / 100:.2f}"
