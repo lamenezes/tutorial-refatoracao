@@ -1,6 +1,5 @@
 def fatura(dados_demonstrativo, obras):
     valor_total = 0
-    total_créditos = 0
     resultado = f"Recibo para {dados_demonstrativo['cliente']}\n"
 
     for performance in dados_demonstrativo["performances"]:
@@ -9,11 +8,14 @@ def fatura(dados_demonstrativo, obras):
         valor_total += valor_atual
         resultado += f"  {performance['obra']['nome']}: {formata_brl(valor_atual)} ({performance['espectadores']} lugares)\n"
 
-    for performance in dados_demonstrativo["performances"]:
-        total_créditos += calcula_creditos(performance)
+    def calcula_creditos_totais(performance):
+        total_créditos = 0
+        for performance in dados_demonstrativo["performances"]:
+            total_créditos += calcula_creditos(performance)
+        return total_créditos
 
     resultado += f"Valor a pagar é de {formata_brl(valor_total)}\n"
-    resultado += f"Você ganhou {total_créditos} créditos\n"
+    resultado += f"Você ganhou {calcula_creditos_totais(performance)} créditos\n"
     return resultado
 
 
