@@ -1,8 +1,21 @@
+from dataclasses import dataclass
+
+
+@dataclass
+class Fatura:
+    cliente: str
+    performances: list[dict]
+
+
 def fatura(dados_demonstrativo, obras):
-    return renderiza_texto_plano(dados_demonstrativo, obras)
+    fatura = Fatura(
+        cliente=dados_demonstrativo["cliente"],
+        performances=dados_demonstrativo["performances"],
+    )
+    return renderiza_texto_plano(dados_demonstrativo, fatura, obras)
 
 
-def renderiza_texto_plano(dados_demonstrativo, obras):
+def renderiza_texto_plano(dados_demonstrativo, fatura, obras):
     resultado = f"Recibo para {dados_demonstrativo['cliente']}\n"
 
     for performance in dados_demonstrativo["performances"]:
