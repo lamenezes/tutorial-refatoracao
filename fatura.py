@@ -21,8 +21,7 @@ def calcula_creditos_totais(dados_demonstrativo):
 def calcula_valor_total(dados_demonstrativo):
     valor_total = 0
     for performance in dados_demonstrativo["performances"]:
-        valor_atual = calcula_valor(performance)
-        valor_total += valor_atual
+        valor_total += calcula_valor(performance)
     return valor_total
 
 
