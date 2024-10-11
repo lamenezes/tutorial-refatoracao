@@ -2,14 +2,9 @@ from dataclasses import dataclass
 
 
 def fatura(dados_demonstrativo, obras):
-    performances = []
-    for perf in dados_demonstrativo["performances"]:
-        performance = Performance(obra=obras[perf["id_obra"]], espectadores=perf["espectadores"])
-        performances.append(performance)
-
     fatura = Fatura(
         cliente=dados_demonstrativo["cliente"],
-        performances=performances,
+        performances=Performance.cria_varios(dados_demonstrativo, obras),
     )
     return renderiza_texto_plano(fatura, obras)
 
@@ -36,6 +31,14 @@ class Fatura:
 class Performance:
     espectadores: int
     obra: dict
+
+    @classmethod
+    def cria_varios(cls, dados, obras):
+        performances = []
+        for perf in dados["performances"]:
+            performance = Performance(obra=obras[perf["id_obra"]], espectadores=perf["espectadores"])
+            performances.append(performance)
+        return performances
 
 
 def calcula_creditos_totais(fatura):
