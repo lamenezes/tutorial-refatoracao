@@ -6,10 +6,10 @@ def fatura(dados_demonstrativo, obras):
         cliente=dados_demonstrativo["cliente"],
         performances=Performance.cria_varios(dados_demonstrativo, obras),
     )
-    return renderiza_texto_plano(fatura, obras)
+    return renderiza_texto_plano(fatura)
 
 
-def renderiza_texto_plano(fatura, obras):
+def renderiza_texto_plano(fatura):
     resultado = f"Recibo para {fatura.cliente}\n"
 
     for performance in fatura.performances:
