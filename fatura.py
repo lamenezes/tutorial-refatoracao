@@ -1,25 +1,6 @@
 from dataclasses import dataclass
 
 
-def fatura(dados_demonstrativo, obras):
-    fatura = Fatura(
-        cliente=dados_demonstrativo["cliente"],
-        performances=Performance.cria_varios(dados_demonstrativo, obras),
-    )
-    return renderiza_texto_plano(fatura)
-
-
-def renderiza_texto_plano(fatura):
-    resultado = f"Recibo para {fatura.cliente}\n"
-
-    for performance in fatura.performances:
-        resultado += f"  {performance.obra['nome']}: {formata_brl(performance.calcula_valor())} ({performance.espectadores} lugares)\n"
-
-    resultado += f"Valor a pagar é de {formata_brl(fatura.calcula_valor_total())}\n"
-    resultado += f"Você ganhou {fatura.calcula_creditos_totais()} créditos\n"
-    return resultado
-
-
 @dataclass
 class Fatura:
     cliente: str
@@ -74,7 +55,3 @@ class Performance:
         if self.obra["tipo"] == "comédia":
             total_créditos += self.espectadores // 5
         return total_créditos
-
-
-def formata_brl(valor):
-    return f"R$ {valor / 100:.2f}"
