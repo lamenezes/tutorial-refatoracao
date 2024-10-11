@@ -23,7 +23,7 @@ def renderiza_texto_plano(dados_demonstrativo, fatura, obras):
         valor_atual = calcula_valor(performance)
         resultado += f"  {performance['obra']['nome']}: {formata_brl(valor_atual)} ({performance['espectadores']} lugares)\n"
 
-    resultado += f"Valor a pagar é de {formata_brl(calcula_valor_total(dados_demonstrativo))}\n"
+    resultado += f"Valor a pagar é de {formata_brl(calcula_valor_total(fatura))}\n"
     resultado += f"Você ganhou {calcula_creditos_totais(dados_demonstrativo)} créditos\n"
     return resultado
 
@@ -35,9 +35,9 @@ def calcula_creditos_totais(dados_demonstrativo):
     return total_créditos
 
 
-def calcula_valor_total(dados_demonstrativo):
+def calcula_valor_total(fatura):
     valor_total = 0
-    for performance in dados_demonstrativo["performances"]:
+    for performance in fatura.performances:
         valor_total += calcula_valor(performance)
     return valor_total
 
