@@ -59,25 +59,19 @@ class CalculadoraPerformance:
             total_créditos += self.performance.espectadores // 5
         return total_créditos
 
+
+class CalculadoraComedia(CalculadoraPerformance):
     def calcula_valor(self):
-        valor_atual = 0
-        if self.performance.obra["tipo"] == "tragédia":
-            valor_atual = 40_000
-            if self.performance.espectadores > 30:
-                valor_atual += 1000 * (self.performance.espectadores - 30)
-        elif self.performance.obra["tipo"] == "comédia":
-            valor_atual = 30_000
-            if self.performance.espectadores > 20:
-                valor_atual += 10000 + 500 * (self.performance.espectadores - 20)
-            valor_atual += 300 * self.performance.espectadores
-        else:
-            raise ValueError(f"Tipo de obra desconhecido {self.performance.obra['tipo']}")
+        valor_atual = 30_000
+        if self.performance.espectadores > 20:
+            valor_atual += 10000 + 500 * (self.performance.espectadores - 20)
+        valor_atual += 300 * self.performance.espectadores
         return valor_atual
 
 
-class CalculadoraComedia(CalculadoraPerformance):
-    pass
-
-
 class CalculadoraTragedia(CalculadoraPerformance):
-    pass
+    def calcula_valor(self):
+        valor_atual = 40_000
+        if self.performance.espectadores > 30:
+            valor_atual += 1000 * (self.performance.espectadores - 30)
+        return valor_atual
