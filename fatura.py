@@ -16,9 +16,9 @@ def fatura(dados_demonstrativo, obras):
 
 
 def renderiza_texto_plano(dados_demonstrativo, fatura, obras):
-    resultado = f"Recibo para {dados_demonstrativo['cliente']}\n"
+    resultado = f"Recibo para {fatura.cliente}\n"
 
-    for performance in dados_demonstrativo["performances"]:
+    for performance in fatura.performances:
         performance["obra"] = obras[performance["id_obra"]]
         valor_atual = calcula_valor(performance)
         resultado += f"  {performance['obra']['nome']}: {formata_brl(valor_atual)} ({performance['espectadores']} lugares)\n"
