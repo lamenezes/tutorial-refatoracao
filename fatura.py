@@ -5,8 +5,11 @@ def fatura(dados_demonstrativo, obras):
     for performance in dados_demonstrativo["performances"]:
         performance["obra"] = obras[performance["id_obra"]]
         valor_atual = calcula_valor(performance)
-        valor_total += valor_atual
         resultado += f"  {performance['obra']['nome']}: {formata_brl(valor_atual)} ({performance['espectadores']} lugares)\n"
+
+    for performance in dados_demonstrativo["performances"]:
+        valor_atual = calcula_valor(performance)
+        valor_total += valor_atual
 
     resultado += f"Valor a pagar é de {formata_brl(valor_total)}\n"
     resultado += f"Você ganhou {calcula_creditos_totais(dados_demonstrativo)} créditos\n"
