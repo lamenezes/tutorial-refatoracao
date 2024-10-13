@@ -1,4 +1,4 @@
-def fatura(dados_demonstrativo, obras):
+def gera_fatura(dados_demonstrativo, obras):
     resultado = f"Recibo para {dados_demonstrativo['cliente']}\n"
 
     for performance in dados_demonstrativo["performances"]:

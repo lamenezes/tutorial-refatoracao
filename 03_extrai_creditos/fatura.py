@@ -1,17 +1,17 @@
-def fatura(dados_demonstrativo, obras):
+def gera_fatura(dados_demonstrativo, obras):
     valor_total = 0
-    total_créditos = 0
+    total_creditos = 0
     resultado = f"Recibo para {dados_demonstrativo['cliente']}\n"
 
     for performance in dados_demonstrativo["performances"]:
         performance["obra"] = obras[performance["id_obra"]]
         # soma créditos por volume
-        total_créditos += calcula_creditos(performance)
+        total_creditos += calcula_creditos(performance)
         resultado += f"  {performance['obra']['nome']}: {brl(calcula_valor(performance) / 100)} ({performance['espectadores']} lugares)\n"
         valor_total += calcula_valor(performance)
 
     resultado += f"Valor a pagar é de {brl(valor_total / 100)}\n"
-    resultado += f"Você ganhou {total_créditos} créditos\n"
+    resultado += f"Você ganhou {total_creditos} créditos\n"
     return resultado
 
 

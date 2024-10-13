@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 
-def fatura(dados_demonstrativo, obras):
+def gera_fatura(dados_demonstrativo, obras):
     fatura = Fatura(
         cliente=dados_demonstrativo["cliente"],
         performances=dados_demonstrativo["performances"],
